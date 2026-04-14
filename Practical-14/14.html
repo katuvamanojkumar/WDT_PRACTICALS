@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Online Quiz</title>
+</head>
+<body style="background-color: #f0f2f5; font-family: sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0;">
+<div id="quiz-card" style="background-color: white; width: 90%; max-width: 500px; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); text-align: center;">
+<div style="display: flex; justify-content: space-between; margin-bottom: 20px; font-size: 14px; font-weight: bold; color: #555;">
+<div id="progress-text">Question 1 of 10</div>
+<div id="score-text" style="color: #007bff;">Score: 0</div>
+</div>
+<div id="quiz-content">
+<h2 id="question-display" style="font-size: 22px; color: #333; margin-bottom: 25px;">Loading Question...</h2>
+<div id="options-list" style="display: flex; flex-direction: column; gap: 10px;">
+</div>
+</div>
+ 
+
+<div id="result-screen" style="display: none;">
+<h1 style="font-size: 40px; margin-bottom: 10px;">🎯</h1>
+<h2 style="color: #333;">Quiz Finished!</h2>
+<p id="final-result" style="font-size: 18px; color: #666;"></p>
+<button onclick="location.reload()" style="background-color: #333; color: white; border: none; padding: 12px 25px; border-radius: 6px; cursor: pointer; font-weight: bold; margin-top: 20px;">Restart Quiz</button>
+</div>
+</div>
+<script>
+const quizData = [
+{ q: "Which HTML tag is used for the largest heading?", a: ["<h6>", "<head>", "<h1>", "<heading>"], c: 2 },
+{ q: "What does HTML stand for?", a: ["Hyperlinks and Text Markup Language", "Hyper Text Markup Language", "Home Tool Markup Language", "Hyper Tool Markup Language"], c: 1 },
+{ q: "Which HTML attribute is used to define inline styles?", a: ["font", "class", "styles", "style"], c: 3 },
+{ q: "How do you create a hyperlink in HTML?", a: ["<a>", "<link>", "<img>", "<href>"],
+c: 0 },
+{ q: "Which character is used to indicate an end tag?", a: ["^", "<", "*", "/"], c: 3 },
+{ q: "Which HTML element is used to specify a footer for a document?", a: ["<bottom>", "<section>", "<footer>", "<aside>"], c: 2 },
+{ q: "In HTML, which attribute is used to provide an image path?", a: ["link", "src", "href", "url"], c: 1 },
+{ q: "Which HTML element is used to define an unordered list?", a: ["<ul>", "<ol>", "<li>", "<list>"], c: 0 },
+ 
+
+{ q: "Which tag is used to insert a line break?", a: ["<break>", "<lb>", "<br>", "<hr>"],
+c: 2 },
+{ q: "What is the correct HTML for making a checkbox?", a: ["<check>", "<checkbox>", "<input type='checkbox'>", "<input type='check'>"], c: 2 }
+];
+let currentIdx = 0;
+let score = 0;
+function loadQuestion() {
+const data = quizData[currentIdx]; document.getElementById('question-display').innerText = data.q;
+document.getElementById('progress-text').innerText = `Question ${currentIdx + 1} of
+${quizData.length}`;
+const list = document.getElementById('options-list'); list.innerHTML = '';
+data.a.forEach((opt, i) => {
+const btn = document.createElement('button'); btn.innerText = opt;
+btn.style.padding = "15px"; btn.style.border = "2px solid #eee"; btn.style.borderRadius = "8px"; btn.style.backgroundColor = "white"; btn.style.cursor = "pointer"; btn.style.fontSize = "16px"; btn.style.textAlign = "left"; btn.style.transition = "0.2s";
+ 
+
+btn.onmouseover = () => btn.style.backgroundColor = "#f8f9fa"; btn.onmouseout = () => btn.style.backgroundColor = "white"; btn.onclick = () => selectAnswer(i, btn);
+list.appendChild(btn);
+});
+}
+function selectAnswer(index, element) {
+const correct = quizData[currentIdx].c;
+const buttons = document.getElementById('options-list').children;
+for(let b of buttons) b.disabled = true; if (index === correct) {
+score++;
+element.style.backgroundColor = "#d4edda"; element.style.borderColor = "#28a745"; element.style.color = "#155724";
+document.getElementById('score-text').innerText = `Score: ${score}`;
+} else {
+element.style.backgroundColor = "#f8d7da"; element.style.borderColor = "#dc3545"; element.style.color = "#721c24"; buttons[correct].style.backgroundColor = "#d4edda"; buttons[correct].style.borderColor = "#28a745";
+}
+setTimeout(() => {
+ 
+
+currentIdx++;
+if (currentIdx < quizData.length) {
+loadQuestion();
+} else {
+showResult();
+}
+}, 1000);
+}
+function showResult() {
+document.getElementById('quiz-content').style.display = 'none'; document.getElementById('progress-text').style.display = 'none'; document.getElementById('score-text').style.display = 'none'; const result = document.getElementById('result-screen'); result.style.display = 'block';
+document.getElementById('final-result').innerText = `You scored ${score} out of
+${quizData.length}`;
+}
+loadQuestion();
+</script>
+</body>
+</html>

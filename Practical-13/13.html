@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Student Registration Form</title>
+</head>
+<body bgcolor="grey">
+<center>
+<h2>Student Registration Form</h2>
+<form id="registrationForm">
+<label>Enrollment Number:</label><br>
+<input type="text" id="enrollment"><br><br>
+<label>Name:</label><br>
+<input type="text" id="name"><br><br>
+
+
+<label>Email ID:</label><br>
+<input type="text" id="email"><br><br>
+
+
+<label>Password:</label><br>
+<input type="password" id="password"><br><br>
+ 
+
+
+<label>Confirm Password:</label><br>
+<input type="password" id="confirmPassword"><br><br>
+
+
+<label>Phone Number:</label><br>
+<input type="text" id="phone"><br><br>
+
+
+<label>Address:</label><br>
+<textarea id="address"></textarea><br><br>
+
+
+<label>Gender:</label>
+<input type="radio" name="gender" value="Male"> Male
+<input type="radio" name="gender" value="Female"> Female
+<input type="radio" name="gender" value="Other"> Other<br><br>
+
+
+<label>Branch:</label>
+<select id="branch">
+<option value="">--Select--</option>
+<option value="CS">Computer Science</option>
+<option value="IT">Information Technology</option>
+<option value="ME">Mechanical</option>
+</select><br><br>
+
+
+<button type="button" onclick="validateForm()">Submit</button>
+ 
+
+</form>
+<script>
+function validateForm() {
+const enrollment = document.getElementById('enrollment').value;
+const name = document.getElementById('name').value; const email = document.getElementById('email').value; const pass = document.getElementById('password').value;
+const confirmPass = document.getElementById('confirmPassword').value;
+const phone = document.getElementById('phone').value; const address = document.getElementById('address').value; const branch = document.getElementById('branch').value;
+const gender = document.querySelector('input[name="gender"]:checked');
+const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const phonePattern = /^[0-9]{10}$/; if (enrollment === "") {
+alert("Enrollment Number is required.");
+return;
+}
+if (name.length < 3) {
+alert("Please enter a valid Name (min 3 chars).");
+return;
+}
+if (!emailPattern.test(email)) {
+alert("Please enter a valid Email ID.");
+ 
+
+return;
+}
+if (pass.length < 6) {
+alert("Password must be at least 6 characters.");
+return;
+}
+if (pass !== confirmPass) { alert("Passwords do not match!"); return;
+}
+if (!phonePattern.test(phone)) {
+alert("Phone number must be exactly 10 digits.");
+return;
+}
+if (address.trim() === "") { alert("Address cannot be empty."); return;
+}
+if (!gender) {
+alert("Please select a Gender.");
+return;
+}
+if (branch === "") {
+alert("Please select a Branch.");
+ 
+
+return;
+}
+alert("Registration Successful for " + name + "!"); document.getElementById('registrationForm').reset();
+}
+</script>
+</center>
+</body>
+</html>
