@@ -1,0 +1,153 @@
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+body {
+background: #1e2345;
+color: white;
+line-height: 1.6;
+}
+.container {
+width: 90%;
+max-width: 1100px;
+margin: auto;
+}
+.hero {
+background: #b11a36;
+padding: 60px 0;
+}
+.hero-wrapper {
+display: flex;
+align-items: center;
+justify-content: space-between;
+}
+.hero-left {
+position: relative;
+}
+.hero-left img {
+width: 320px;
+display: block;
+}
+.hero-left h1 {
+position: absolute;
+bottom: 20px;
+left: 20px;
+font-size: 42px;
+color: rgb(255, 255, 255);
+letter-spacing: 2px;
+}
+.hero-right {
+max-width: 450px;
+color: black;
+}
+.hero-right p {
+margin-bottom: 20px;
+}
+.btn-dark {
+background: #1e2345;
+color: white;
+border: none;
+padding: 10px 20px;
+cursor: pointer;
+}
+.btn-yellow {
+background: #f4d40f;
+color: black;
+border: none;
+padding: 10px 20px;
+cursor: pointer;
+}
+.design {
+padding: 80px 0;
+text-align: center;
+}
+.design h2 {
+font-size: 48px;
+}
+.tagline {
+margin: 10px 0;
+font-size: 18px;
+}
+.description {
+max-width: 600px;
+margin: 20px auto;
+}
+.gallery {
+padding: 60px 0;
+}
+.grid {
+display: grid;
+grid-template-columns: repeat(3, 1fr);
+gap: 15px;
+}
+.grid img {
+width: 100%;
+height: 220px;
+object-fit: cover;
+transition: 0.3s;
+}
+grid img:hover {
+transform: scale(1.05);
+}
+.contact {
+background: #58a7c3;
+padding: 60px 0;
+color: black;
+}
+.contact-wrapper {
+display: flex;
+justify-content: space-between;
+align-items: flex-start;
+gap: 40px;
+}
+.contact-form {
+flex: 1;
+}
+.contact-form input,
+.contact-form textarea {
+width: 100%;
+padding: 10px;
+margin-bottom: 15px;
+border: none;
+}
+.contact-info {
+flex: 1;
+}
+.contact-info h3 {
+margin-bottom: 20px;
+}
+footer {
+text-align: center;
+padding: 15px;
+background: #111;
+}
+@media (max-width: 992px) {
+.hero-wrapper {
+flex-direction: column;
+text-align: center;
+gap: 30px;
+}
+.hero-left h1 {
+left: 50%;
+transform: translateX(-50%);
+}
+.contact-wrapper {
+flex-direction: column;
+}
+.grid {
+grid-template-columns: repeat(2, 1fr);
+}
+}
+@media (max-width: 600px) {
+.grid {
+grid-template-columns: 1fr;
+}
+.hero-left img {
+width: 250px;
+}
+.design h2 {
+font-size: 36px;
+}
+}
